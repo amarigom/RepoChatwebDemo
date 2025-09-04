@@ -1,0 +1,107 @@
+/* Contenedor principal */
+.chat-container {
+  max-width: 500px;
+  height: 80vh;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f0f2f5;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título */
+.chat-container h1 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #075e54;
+}
+
+/* Input PDF */
+.chat-container input[type="file"] {
+  display: block;
+  margin: 10px 0 20px;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #888;
+  cursor: pointer;
+}
+
+/* Sesión activa */
+.session-info {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Área de chat (scroll) */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Burbujas de chat */
+.message {
+  max-width: 75%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  word-wrap: break-word;
+}
+
+/* Usuario (derecha) */
+.message-user {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+  border-bottom-right-radius: 0;
+}
+
+/* Bot (izquierda) */
+.message-bot {
+  background-color: #fff;
+  align-self: flex-start;
+  border-bottom-left-radius: 0;
+}
+
+/* Input de pregunta y botón */
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #34b7f1;
+  box-shadow: 0 0 5px rgba(52, 183, 241, 0.5);
+}
+
+.input-group button {
+  background-color: #34b7f1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.input-group button:hover {
+  background-color: #0b93f6;
+}
