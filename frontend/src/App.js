@@ -20,7 +20,7 @@ export default function ChatApp() {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
 
-    const res = await fetch("http://127.0.0.1:8000/upload_pdf/", {
+    const res = await fetch("http://127.0.0.1:8000/upload_file/", {
       method: "POST",
       body: formData,
     });
