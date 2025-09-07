@@ -1,58 +1,88 @@
 import React, { useState } from "react";
+import axios from "axios";
+import "./ChatApp.css"; // si ya tenés tu CSS
 
-function ChatBox() {
+export default function ChatApp() {
+  const [sessionId, setSessionId] = useState(null);
+  const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-  const [sessionId, setSessionId] = useState(""); // Aquí va el session_id del PDF
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+  // 👉 Subir PDF
+  const handleUpload = async (e) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", e.target.files[0]);
 
-    const userMsg = { sender: "user", text: input };
-    setMessages([...messages, userMsg]);
+      const res = await axios.post(
+        "http://127.0.0.1:8000/upload_pdf/",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      setSessionId(res.data.session_id);
+      console.log("📂 PDF subido. Session ID:", res.data.session_id);
+    } catch (err) {
+      console.error("❌ Error al subir PDF:", err);
+    }
+  };
+
+  // 👉 Hacer pregunta
+  const handleAsk = async () => {
+    if (!sessionId || !question.trim()) return;
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/ask", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ session_id: sessionId, question: input })
-      });
-      const data = await res.json();
+      const formData = new FormData();
+      formData.append("session_id", sessionId);
+      formData.append("question", question);
 
-      const botMsg = { sender: "bot", text: data.answer || "No hay respuesta" };
-      setMessages(prev => [...prev, userMsg, botMsg]);
+      const res = await axios.post("http://127.0.0.1:8000/chat/", formData);
+
+      setMessages((prev) => [...prev, { q: question, a: res.data.answer }]);
+      setQuestion("");
     } catch (err) {
-      console.error(err);
-      const errorMsg = { sender: "bot", text: "Error de conexión con el backend" };
-      setMessages(prev => [...prev, userMsg, errorMsg]);
+      console.error("Error en el chat:", err);
     }
-
-    setInput("");
   };
 
   return (
-    <div>
-      <div style={{ border: "1px solid #ccc", padding: 10, minHeight: 300, overflowY: "auto" }}>
-        {messages.map((m, i) => (
-          <div key={i} style={{ textAlign: m.sender === "user" ? "right" : "left" }}>
-            <b>{m.sender}:</b> {m.text}
-          </div>
-        ))}
-      </div>
+    <div className="chat-container">
+      <h1 className="chat-title">Chat incorporando PDF</h1>
 
-      <input
-        style={{ width: "80%", padding: 5, marginTop: 10 }}
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && handleSend()}
-        placeholder="Escribí tu pregunta..."
-      />
-      <button style={{ width: "18%", padding: 5, marginLeft: "2%" }} onClick={handleSend}>
-        Enviar
-      </button>
+      {!sessionId && (
+        <div className="upload-section">
+          <p>Subí tu PDF para empezar:</p>
+          <input type="file" accept="application/pdf" onChange={handleUpload} />
+        </div>
+      )}
+
+      {sessionId && (
+        <div className="chat-box">
+          <p className="session-id">Sesión activa: {sessionId}</p>
+
+          <div className="input-area">
+            <input
+              className="chat-input"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Escribí tu pregunta..."
+            />
+            <button onClick={handleAsk} className="chat-button">
+              Preguntar
+            </button>
+          </div>
+
+          <div className="messages">
+            {messages.map((m, i) => (
+              <div key={i} className="message">
+                <p className="msg-user"> Tú: {m.q}</p>
+                <p className="msg-bot"> Bot: {m.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
-export default ChatBox;
