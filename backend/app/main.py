@@ -7,7 +7,9 @@ import pandas as pd
 import google.generativeai as genai
 
 # 🔑 Configura tu API Key de Gemini
-os.environ["GOOGLE_API_KEY"] = "AIzaSyCGziNtswrtn4x8ThttDZ-7voAYp0Kgqxw"
+from dotenv import load_dotenv
+load_dotenv(dotenv_path="../.env")
+
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 print("API Key:", os.environ.get("GOOGLE_API_KEY"))
 
