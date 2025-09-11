@@ -83,6 +83,7 @@ Endpoint de chat: POST /chat/
 Cada solicitud debe incluir el session_id obtenido al subir un archivo.
 
 Se recomienda crear un Collection en Postman para agrupar todos los tests.
+
 ---
 ## 📂 Estructura del proyecto
 
