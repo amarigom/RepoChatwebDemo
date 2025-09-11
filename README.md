@@ -1,85 +1,109 @@
-Chat Web Demo
+**Negrita** 
+# Chat Web Demo
 
-Demo de aplicación web que permite subir archivos (PDF, CSV, Excel) y hacer consultas tipo chat sobre su contenido, utilizando FastAPI, React y Gemini AI.
+Aplicación web que permite subir archivos PDF, CSV o Excel, extraer su contenido y realizar consultas mediante un chat interactivo utilizando **Google Gemini AI**.
 
-🚀 Funcionalidades
+---
 
-Subida de archivos PDF, CSV y Excel con múltiples hojas
+## 🚀 Características
 
-Extracción de texto de los archivos para análisis
+- Subida de archivos: PDF, CSV, XLSX.  
+- Extracción de texto de documentos y hojas de cálculo.  
+- Chat interactivo que responde preguntas basadas en el contenido del archivo.  
+- Sistema de sesiones único por usuario.  
+- Compatible con **Postman** para pruebas del backend.  
 
-Chat interactivo para consultar información contenida en los archivos
+---
 
-Gestión de sesiones para mantener distintos contextos de archivos
+## 🛠 Herramientas utilizadas
 
-Interfaz web construida en React
+- **Frontend:** React  
+- **Backend:** FastAPI  
+- **Contenedores:** Docker  
+- **Testing:** Postman, Jest  
+- **IA:** Google Gemini API  
 
-🧰 Herramientas utilizadas
+---
 
-Backend: Python, FastAPI, Uvicorn
+## 📚 Librerías principales
 
-Frontend: React, React DOM
+- `PyPDF2` → Para leer PDFs  
+- `pandas` → Para manejar CSV y Excel  
+- `openpyxl` → Motor de Excel para pandas  
+- `python-dotenv` → Para cargar variables de entorno  
+- `fastapi` → Framework web backend  
+- `google-generativeai` → Integración con Gemini AI  
+- `@testing-library/jest-dom` → Para tests en frontend React  
 
-Contenedores: Docker
+---
 
-Gestión de proyectos: Git, GitHub
+## ⚙️ Variables de entorno
 
-🧩 Librerías utilizadas
+Crea un archivo `.env` en el directorio raíz del proyecto con la siguiente variable:
 
-Python / Backend
+```env
+GOOGLE_API_KEY=REEMPLAZAR_CON_TU_API_KEY
+Nota: No compartas tu API Key públicamente. Se recomienda añadir .env al .gitignore.
 
-fastapi → Servidor y endpoints
+🐳 Uso con Docker
+Construir imagen
+docker build -t chat-web-demo-backend .
 
-uvicorn → Servidor ASGI
-
-pandas → Manejo de datos CSV/Excel
-
-PyPDF2 → Lectura de PDFs
-
-python-dotenv → Variables de entorno .env
-
-google-generativeai → Conexión con Gemini AI
-
-Frontend / React
-
-react, react-dom → Construcción de la interfaz
-
-@testing-library/react, jest-dom → Tests de componentes
-
-Testing / QA
-
-Se puede usar Postman para probar los endpoints /upload_file/ y /chat/
-
-Tests unitarios de React con Jest y Testing Library
-
-🐳 Docker
-
-La aplicación se puede ejecutar dentro de un contenedor Docker para facilitar el despliegue
-
-Contiene un Dockerfile listo para construir la imagen y levantar el contenedor
-
-Para ejecutar:
-
-docker build -t chat-web-demo .
-docker run -p 8000:8000 --env-file .env chat-web-demo
-
-🔑 Variables de entorno
-
-El archivo .env debe contener tu API Key de Gemini AI:
-
-GOOGLE_API_KEY=TU_API_KEY
+Ejecutar contenedor
+docker run -p 8000:8000 --env-file .env chat-web-demo-backend
 
 
-No compartas tu API Key en público. Cada usuario debe colocar la suya en su .env.
+Esto expondrá la API en http://localhost:8000
 
-📌 Cómo usar
+💻 Ejecución local sin Docker
 
-Clonar el repositorio
+Crear un entorno virtual:
 
-Crear un archivo .env con tu API Key
+python -m venv venv
 
-Ejecutar la aplicación con Docker o en local con Python (uvicorn main:app --reload)
 
-Abrir el frontend en el navegador para interactuar con el chat
+Activar el entorno y instalar dependencias:
 
-Subir archivos PDF, CSV o Excel y hacer preguntas sobre su contenido
+# Windows
+venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+
+Ejecutar la app:
+
+uvicorn main:app --reload
+
+🧪 Pruebas con Postman
+
+Endpoint para subir archivos: POST /upload_file/
+
+Endpoint de chat: POST /chat/
+
+Cada solicitud debe incluir el session_id obtenido al subir un archivo.
+
+Se recomienda crear un Collection en Postman para agrupar todos los tests.
+
+📂 Estructura del proyecto
+chat-web-demo/
+├─ backend/
+│  ├─ main.py
+│  ├─ requirements.txt
+│  └─ .env (no subir a GitHub)
+├─ frontend/
+│  ├─ src/
+│  ├─ package.json
+│  └─ ...
+├─ Dockerfile
+├─ docker-compose.yml (opcional)
+└─ README.md
+
+✅ Notas finales
+
+El proyecto está preparado para ser desplegado localmente o en contenedores Docker.
+
+Para ejecutar en otra máquina, basta con clonar el repo, instalar dependencias y configurar el .env con la API Key correspondiente.
+
+Se puede utilizar Postman para testear la API sin necesidad de frontend.
