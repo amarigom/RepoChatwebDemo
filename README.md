@@ -39,9 +39,6 @@ Aplicación web que permite subir archivos PDF, CSV o Excel, extraer su contenid
 
 ## ⚙️ Variables de entorno
 
-Crea un archivo `.env` en el directorio raíz del proyecto con la siguiente variable:
-
-```env
 GOOGLE_API_KEY=REEMPLAZAR_CON_TU_API_KEY
 Nota: No compartas tu API Key públicamente. Se recomienda añadir .env al .gitignore.
 ---
