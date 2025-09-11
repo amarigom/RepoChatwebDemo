@@ -1,4 +1,4 @@
-**Negrita** 
+ 
 # Chat Web Demo
 
 Aplicación web que permite subir archivos PDF, CSV o Excel, extraer su contenido y realizar consultas mediante un chat interactivo utilizando **Google Gemini AI**.
@@ -85,6 +85,7 @@ Cada solicitud debe incluir el session_id obtenido al subir un archivo.
 Se recomienda crear un Collection en Postman para agrupar todos los tests.
 ---
 ## 📂 Estructura del proyecto
+
 chat-web-demo/
 ├─ backend/
 │  ├─ main.py
@@ -93,10 +94,12 @@ chat-web-demo/
 ├─ frontend/
 │  ├─ src/
 │  ├─ package.json
-│  └─ ... push
+│  └─ ...
 ├─ Dockerfile
 ├─ docker-compose.yml (opcional)
 └─ README.md
+
+
 ---
 ## ✅ Notas finales
 
