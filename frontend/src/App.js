@@ -52,7 +52,7 @@ export default function ChatApp() {
 
       {!sessionId && (
         <div>
-          <p>Subí un PDF para empezar:</p>
+          <p>Subí un PDF/Excel/CSV para empezar:</p>
           <input type="file" accept="application/pdf" onChange={handleUpload} />
         </div>
       )}

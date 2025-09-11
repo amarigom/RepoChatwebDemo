@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+Chat Web Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Demo de aplicación web que permite subir archivos (PDF, CSV, Excel) y hacer consultas tipo chat sobre su contenido, utilizando FastAPI, React y Gemini AI.
 
-## Available Scripts
+🚀 Funcionalidades
 
-In the project directory, you can run:
+Subida de archivos PDF, CSV y Excel con múltiples hojas
 
-### `npm start`
+Extracción de texto de los archivos para análisis
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Chat interactivo para consultar información contenida en los archivos
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Gestión de sesiones para mantener distintos contextos de archivos
 
-### `npm test`
+Interfaz web construida en React
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+🧰 Herramientas utilizadas
 
-### `npm run build`
+Backend: Python, FastAPI, Uvicorn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Frontend: React, React DOM
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Contenedores: Docker
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Gestión de proyectos: Git, GitHub
 
-### `npm run eject`
+🧩 Librerías utilizadas
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Python / Backend
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+fastapi → Servidor y endpoints
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+uvicorn → Servidor ASGI
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+pandas → Manejo de datos CSV/Excel
 
-## Learn More
+PyPDF2 → Lectura de PDFs
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+python-dotenv → Variables de entorno .env
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+google-generativeai → Conexión con Gemini AI
 
-### Code Splitting
+Frontend / React
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+react, react-dom → Construcción de la interfaz
 
-### Analyzing the Bundle Size
+@testing-library/react, jest-dom → Tests de componentes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Testing / QA
 
-### Making a Progressive Web App
+Se puede usar Postman para probar los endpoints /upload_file/ y /chat/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Tests unitarios de React con Jest y Testing Library
 
-### Advanced Configuration
+🐳 Docker
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+La aplicación se puede ejecutar dentro de un contenedor Docker para facilitar el despliegue
 
-### Deployment
+Contiene un Dockerfile listo para construir la imagen y levantar el contenedor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Para ejecutar:
 
-### `npm run build` fails to minify
+docker build -t chat-web-demo .
+docker run -p 8000:8000 --env-file .env chat-web-demo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🔑 Variables de entorno
+
+El archivo .env debe contener tu API Key de Gemini AI:
+
+GOOGLE_API_KEY=TU_API_KEY
+
+
+No compartas tu API Key en público. Cada usuario debe colocar la suya en su .env.
+
+📌 Cómo usar
+
+Clonar el repositorio
+
+Crear un archivo .env con tu API Key
+
+Ejecutar la aplicación con Docker o en local con Python (uvicorn main:app --reload)
+
+Abrir el frontend en el navegador para interactuar con el chat
+
+Subir archivos PDF, CSV o Excel y hacer preguntas sobre su contenido
